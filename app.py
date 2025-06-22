@@ -3,10 +3,12 @@ import random
 class GeradorNomes():
     def __init__(self):
         self.nomes = [
-            "João", "Maria", "Pedro", "Ana", "Lucas", "Laura",
-            "Carlos", "Fernanda", "Rafael", "Juliana", "Gabriel",
-            "Isabela", "Matheus", "Camila", "Felipe", "Sofia"
-        ]
+    "João", "Maria", "Pedro", "Ana", "Lucas", "Laura", "Carlos", "Fernanda",
+    "Rafael", "Juliana", "Gabriel", "Isabela", "Matheus", "Camila", "Felipe", "Sofia",
+    "Bruno", "Amanda", "Thiago", "Beatriz", "Daniel", "Mariana", "Vinícius", "Patrícia",
+    "Gustavo", "Aline", "Rodrigo", "Renata", "Eduardo", "Clara", "Fernando", "Bianca",
+    "Leandro", "Letícia", "André", "Vanessa", "Paulo", "Helena", "Ricardo", "Lívia"
+    ]   
 
     def gerar_nome(self):
         return random.choice(self.nomes)
@@ -30,7 +32,6 @@ class GeradorCategoria():
             "PCD - Deficiência Física",
             "PCD - Deficiência Visual",
             "PCD - Amputados",
-            "Pessoa Normal",
         ]
         
     def gerar_categoria(self):
@@ -42,38 +43,47 @@ class GeradorIdade():
         self.idade_maxima = 60
 
     def gerar_idade(self):
-        return random.randint(self.idade_minima, self.idade_maxima)  
+        return random.randint(self.idade_minima, self.idade_maxima)
 
-class Corredor():
-    def __init___(self):
-        self.nome = GeradorNomes().gerar_nome()
-        self.idade = GeradorIdade().gerar_idade()
-        self.categoria = GeradorCategoria().gerar_categoria()
-        self.colocacao = Colocacao().gerar_colocacao()
-        
-    
+
 def main():
-    nome = GeradorNomes().gerar_nome()
-    idade = random.randint(18, 60)
-    colocacao = Colocacao().gerar_colocacao()
-    categoria = GeradorCategoria().gerar_categoria()
-    premiacao = 0
-    medalha = "Ouro" if colocacao == "1º Lugar" else "Prata" if colocacao == "2º Lugar" else "Bronze" if colocacao == "3º Lugar" else "Sim"
-    trofeu = "Sim" if colocacao in ["1º Lugar", "2º Lugar", "3º Lugar", "4º Lugar", "5º Lugar"] else "Não"
-    if colocacao == "1º Lugar" and categoria == "Pessoa Normal":
-        premiacao = 10000
-    elif colocacao == "2º Lugar" and categoria == "Pessoa Normal":
-        premiacao = 5000
-    elif colocacao == "3º Lugar" and categoria == "Pessoa Normal":
-        premiacao = 3000
-    elif colocacao == "4º Lugar" and categoria == "Pessoa Normal":
-        premiacao = 1500
-    elif colocacao == "5º Lugar" and categoria == "Pessoa Normal":
-        premiacao = 1000
-    elif categoria.startswith("PCD"):
-        premiacao = 2000 if colocacao == "1º Lugar" else 1000 if colocacao == "2º Lugar" else 500 if colocacao == "3º Lugar" else 0
+    gerador = GeradorNomes()
+    geradorIdade = GeradorIdade()
+    geradorCategoria = GeradorCategoria()
+    colocacao_obj = Colocacao()
+
+    nomes = [gerador.gerar_nome() for _ in range(5)]
+    ranking_top5 = []
+    for idx, nome in enumerate(nomes, start=1):
+        colocacao_str = f"{idx}º Lugar"
+        idade = geradorIdade.gerar_idade()
+        if idx == 1:
+            medalha = "Ouro"
+        elif idx == 2:
+            medalha = "Prata"
+        elif idx == 3:
+            medalha = "Bronze"
+        else:
+            medalha = "Sim"
+        trofeu = "Sim" if idx <= 5 else "Não"
+        ranking_top5.append({
+            "colocacao": colocacao_str,
+            "idade": idade,
+            "corredor": nome,
+            "medalha": medalha,
+            "categoria": geradorCategoria.gerar_categoria(),
+            "trofeu": trofeu,            "premiacao": "R$ 10000" if idx == 1 else "R$ 5000" if idx == 2 else "R$ 3000" if idx == 3 else "R$ 1500" if idx == 4 else "R$ 1000"
+        })
     
-    print(f"Corredor: {nome}, Idade: {idade},  Colocação: {colocacao}, Categoria: {categoria}, Premiação: R${premiacao}, Medalha: {medalha}, Troféu: {trofeu}")
+    print("\n Maratona Cidade Verde 2025 \n")
+    print("\n Ranking Principal: \n")
+    for corredor_info in ranking_top5:
+        print(f"Colocação: {corredor_info['colocacao']}, Nome: {corredor_info['corredor']}, Idade: {corredor_info['idade']}, Medalha: {corredor_info['medalha']}, Troféu: {corredor_info['trofeu']}, Premiação: {corredor_info['premiacao']} \n")
     
+    print("\n Ranking da Categoria PCD: \n")
+    for i, corredor_pcd in enumerate(ranking_top5[:3], start=1):
+        premio_pcd = "R$ 2000" if i == 1 else "R$ 1000" if i == 2 else "R$ 500"
+        print(f"Colocação: {corredor_pcd['colocacao']}, Nome: {corredor_pcd['corredor']}, Idade: {corredor_pcd['idade']}, Categoria: {corredor_pcd['categoria']}, Medalha: {corredor_pcd['medalha']}, Troféu: {corredor_pcd['trofeu']}, Premiação: {premio_pcd} \n")
+
 if __name__ == "__main__":
     main()
