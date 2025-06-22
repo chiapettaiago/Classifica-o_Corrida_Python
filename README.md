@@ -94,4 +94,4 @@ Colocação: 3º Lugar, Nome: Lucas, Idade: 42, Categoria: PCD - Amputados, Meda
 
 ## 👨‍🎓 Sobre o Projeto
 
-Este projeto foi desenvolvido como trabalho acadêmico para a disciplina de Resolução de Problemas Computacionais.
+Este projeto foi desenvolvido por Iago Filgueiras Chiapetta como trabalho acadêmico para a disciplina de Resolução de Problemas Computacionais.
