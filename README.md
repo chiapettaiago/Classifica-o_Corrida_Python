@@ -94,8 +94,4 @@ Colocação: 3º Lugar, Nome: Lucas, Idade: 42, Categoria: PCD - Amputados, Meda
 
 ## 👨‍🎓 Sobre o Projeto
 
-Este projeto foi desenvolvido como trabalho acadêmico para a disciplina de Programação em Python. O objetivo foi demonstrar a aplicação de conceitos de Programação Orientada a Objetos, como classes, herança e encapsulamento, além de manipulação de estruturas de dados.
-
----
-
-© 2025 - Maratona Cidade Verde | Desenvolvido para fins acadêmicos
+Este projeto foi desenvolvido como trabalho acadêmico para a disciplina de Resolução de Problemas Computacionais.
